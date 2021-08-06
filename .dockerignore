@@ -1,0 +1,6 @@
+vendor
+Dockerfile*
+*.y*ml
+.git
+.docker*
+*lock*
