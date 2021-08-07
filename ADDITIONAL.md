@@ -9,7 +9,7 @@ sed -i "s/'fallback_locale'.*/'fallback_locale' => env('APP_FALLBACK', 'en'),/" 
 sed -i "s/'faker_locale'.*/'faker_locale' => env('APP_FAKER', 'en_US'),/" config/app.php
 sed -i "s/.*APP_URL.*/&\\n\nAPP_TZ=America\/Manaus\nAPP_LOCALE=pt_BR\nAPP_FALLBACK=pt_BR\nAPP_FAKER=pt_BR/;s/mysql/pgsql/;s/3306/5432/;s/127.0.0.1/docker/" .env.example
 cp -rfv .env.example .env
-./artisan key:generate --ansi
+./artisan key:generate --verbose --ansi
 touch database/database.sqlite
 ```
 
@@ -19,6 +19,14 @@ touch database/database.sqlite
 ./artisan clear-compiled -vvv && ./artisan cache:clear -vvv && ./artisan config:clear -vvv && ./artisan event:clear -vvv && ./artisan optimize:clear -vvv && ./artisan route:clear -vvv && ./artisan view:clear -vvv
 
 ./artisan optimize -vvv
+
+./artisan clear-compiled --verbose && ./artisan cache:clear --verbose && ./artisan config:clear --verbose && ./artisan route:clear --verbose && ./artisan view:clear --verbose && ./artisan serve --verbose --no-interaction --host=localhost --port=8081
+```
+
+## PHP Development Server
+
+```bash
+./artisan serve -vvv --ansi --no-interaction --host=localhost --port=8081
 ```
 
 ## Storage - Create the symbolic link using relative paths
