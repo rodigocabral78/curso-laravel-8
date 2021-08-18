@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Detalhes do Post!!!')
+
+@section('content')
 <h1>Detalhes Post {{ $post->title }}</h1>
 
 <ul>
@@ -13,3 +18,4 @@
 
 <hr>
 <a href="{{ route('posts.index') }}" class="button">Voltar Posts</a>
+@endsection
