@@ -70,7 +70,7 @@ DB_HOST=docker ./artisan migrate:fresh -vvv --force --seed
 
 ./artisan migrate:refresh -vvv --force --seed
 ./artisan migrate:refresh -vvv --force && ./artisan db:seed -vvv --force
-DB_HOST=mysql ./artisan migrate:rollback -vvv && DB_HOST=mysql ./artisan migrate -vvv --pretend > .docker/mysql/mysql.sql
+DB_HOST=docker ./artisan migrate:rollback -vvv && DB_HOST=docker ./artisan migrate -vvv --pretend > .docker/mysql/mysql.sql
 
 ./artisan make:migration create_people_table
 ./artisan make:migration create_groups_table --table=groups --create=groups
