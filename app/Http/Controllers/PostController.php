@@ -22,6 +22,23 @@ class PostController extends Controller
 	}
 
 	/**
+	 * Undocumented function
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function search(Request $request) {
+		// $search = $request->all();
+		$search = $request->except('_token');
+		// dd($search);
+		$posts = Post::where('title', 'like', "%{$request->search}%")
+					->orWhere('content', 'like', "%{$request->search}%")
+					->paginate();
+
+		return view('posts.index', compact('posts', 'search'));
+	}
+
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return \Illuminate\Http\Response

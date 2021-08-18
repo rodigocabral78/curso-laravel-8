@@ -62,6 +62,8 @@ composer require symfony/filesystem
 ```bash
 composer require doctrine/dbal
 
+DB_HOST=docker ./artisan migrate:fresh -vvv --force --seed
+
 ./artisan migrate:fresh -vvv --force --seed
 ./artisan migrate:fresh -vvv --drop-views --force --seed
 ./artisan migrate:fresh -vvv --force && ./artisan db:seed -vvv --force

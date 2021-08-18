@@ -7,6 +7,13 @@
 
 <h1>Posts</h1>
 
+
+<form action="{{ route('posts.search') }}" method="post">
+	@csrf
+	<input type="search" name="search" placeholder="Search">
+	<button type="submit">Search</button>
+</form>
+
 <ul>
 	@foreach ($posts as $post)
 	<li>
@@ -18,4 +25,8 @@
 	@endforeach
 </ul>
 
+@if (isset($search))
+{{ $posts->appends($search)->links() }}
+@else
 {{ $posts->links() }}
+@endif

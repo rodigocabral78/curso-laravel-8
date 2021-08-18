@@ -20,4 +20,5 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+Route::match(['get', 'post'], 'posts/search', [PostController::class, 'search'])->name('posts.search');
 Route::resource('posts', PostController::class);
