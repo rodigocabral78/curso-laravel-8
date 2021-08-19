@@ -85,3 +85,12 @@ DB_HOST=docker ./artisan migrate:rollback -vvv && DB_HOST=docker ./artisan migra
 ./artisan make:request -vvv UserRequest
 ./artisan make:request -vvv UserStoreUpdate
 ```
+
+## Laravel Breeze
+
+```bash
+composer require laravel/breeze --dev
+
+./artisan breeze:install -vvv --ansi
+npm install && npm run dev
+```

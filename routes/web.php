@@ -22,3 +22,9 @@ Route::get('/', function () {
 
 Route::match(['get', 'post'], 'posts/search', [PostController::class, 'search'])->name('posts.search');
 Route::resource('posts', PostController::class);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
