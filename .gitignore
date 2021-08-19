@@ -23,5 +23,5 @@ docker-compose.override.yml
 /.vscode
 .env.backup
 composer.lock
+package-lock.json
 *.md.backup
-*look.json
