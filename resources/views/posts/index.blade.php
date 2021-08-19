@@ -25,7 +25,9 @@
 		[
 		<a href="{{ route('posts.show', $post->id) }}">Ver</a> | <a
 			href="{{ route('posts.edit', $post->id) }}">Editar</a>
-		] {{ $post->title }} | {{ $post->updated_at }}
+		] <img src="{{ url("storage/{$post->image}") }}" alt="{{ $post->title }}" style="max-width: 100px;">
+		{{ $post->title }} |
+		{{ $post->updated_at }}
 	</li>
 	@endforeach
 </ul>

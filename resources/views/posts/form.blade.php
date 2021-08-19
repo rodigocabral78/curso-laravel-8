@@ -12,6 +12,8 @@
 <textarea name="content" id="content" cols="30" rows="4"
 	placeholder="Conteudo">{{ $post->content ?? old('content') }}</textarea>
 <br>
+<input type="file" name="image" id="image">
+<br>
 <button type="submit">Salvar</button>
 <hr>
 <a href="{{ route('posts.index') }}" class="button">Voltar Posts</a>

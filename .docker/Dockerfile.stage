@@ -32,7 +32,7 @@ tzdata \
 # \
 # && composer install
 
-VOLUME /app/database /app/storage/logs /app/storage/framework/cache /app/storage/framework/sessions /app/storage/framework/views
+VOLUME /app/database /app/storage/app/public /app/storage/logs /app/storage/framework/cache /app/storage/framework/sessions /app/storage/framework/views
 
 EXPOSE 8081
 

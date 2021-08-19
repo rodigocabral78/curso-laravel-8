@@ -14,6 +14,7 @@ services:
     working_dir: "/app"
     volumes:
       - ".:/app"
+      - "app:/app/storage/app/public"
       - "logs:/app/storage/logs"
       - "cache:/app/storage/framework/cache"
       - "sessions:/app/storage/framework/sessions"
@@ -94,13 +95,15 @@ services:
     container_name: laravel_adminer
 
 volumes:
+  app:
+    name: laravel_storage_app
   logs:
-    name: laravel_logs
+    name: laravel_storage_logs
   cache:
-    name: laravel_cache
+    name: laravel_storage_cache
   sessions:
-    name: laravel_sessions
+    name: laravel_storage_sessions
   views:
-    name: laravel_views
+    name: laravel_storage_views
   dbdata:
     name: laravel_database

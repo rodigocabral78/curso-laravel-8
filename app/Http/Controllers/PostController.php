@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -58,7 +61,15 @@ class PostController extends Controller
 	public function store(PostRequest $request)
 	{
 		//
-		Post::create($request->all());
+		$data = $request->all();
+		// $request->file('image');
+		if ($request->image->isValid()) {
+			$nameImage = Str::slug($request->title) . '.' . $request->image->getClientOriginalExtension();
+			$image = $request->image->storeAs('posts', $nameImage);
+			$data['image'] = $image;
+		}
+
+		Post::create($data);
 		return redirect()
 			->route('posts.index')
 			->with('msg', 'Post Criado com sucesso');
@@ -118,11 +129,22 @@ class PostController extends Controller
 		//
 		$post = Post::find($post);
 		if (!$post) {
-			# code...
 			return redirect()->route('posts.index');
 		}
+
+		$data = $request->all();
+		if ($request->image && $request->image->isValid()) {
+			if (Storage::exists($post->image)) {
+				Storage::delete($post->image);
+			}
+
+			$nameImage = Str::slug($request->title) . '.' . $request->image->getClientOriginalExtension();
+			$image = $request->image->storeAs('posts', $nameImage);
+			$data['image'] = $image;
+		}
+
 		// dd($post);
-		$post->update($request->all());
+		$post->update($data);
 
 		return redirect()
 			->route('posts.index')
@@ -144,6 +166,11 @@ class PostController extends Controller
 			# code...
 			return redirect()->route('posts.index');
 		}
+
+		if (Storage::exists($post->image)) {
+			Storage::delete($post->image);
+		}
+
 		// dd($post);
 		$post->delete();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostRequest extends FormRequest
 {
@@ -23,10 +24,22 @@ class PostRequest extends FormRequest
 	 */
 	public function rules()
 	{
-		return [
+		$id = $this->segment(2);
+		$rules =  [
 			//
-			'title' => 'required|min:3|max:160',
-			'content' => ['required', 'min:5', 'max:10000'],
+			// 'title' => 'required|min:3|max:160|unique:posts',
+			// 'title' => ['required', 'min:3', 'max:160', "unique:posts,title,{$id},id"],
+			'title' => [
+				'required', 'min:3', 'max:160',
+				Rule::unique('posts')->ignore($id),
+			],
+			'content' => ['nullable', 'min:5', 'max:10000'],
+			'image' => ['required', 'image'],
 		];
+
+		if ($this->method() == 'PUT') {
+			$rules['image'] = ['nullable', 'image'];
+		}
+		return $rules;
 	}
 }

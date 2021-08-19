@@ -26,6 +26,7 @@ class PostFactory extends Factory
             //
 			// 'title' => Str::random(10),
 			'title' => $this->faker->sentence(),
+			'image' => Str::random(30) . 'jpeg',
         	'content' => $this->faker->text(),
         ];
     }
